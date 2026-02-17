@@ -1,51 +1,33 @@
 from mcp.server.fastmcp import FastMCP
-from typing import Dict, Any
 
-# Initialize FastMCP server
+# Initialize the FastMCP server with the given name
+# Description: A helpful MCP server for data processing
 mcp = FastMCP("my-mcp-server")
 
-
-# --- TOOLS ---
-
 @mcp.tool()
-def process_data(input_string: str, factor: int = 1) -> str:
+def process_text(text: str) -> str:
     """
-    Processes a string by repeating it a specified number of times.
+    A simple tool that processes text by reversing it.
     """
-    try:
-        result = (input_string + " ") * factor
-        return f"Processed result: {result.strip()}"
-    except Exception as e:
-        return f"Error processing data: {str(e)}"
+    return text[::-1]
 
-
-@mcp.tool()
-def get_weather_data(city: str) -> Dict[str, Any]:
+@mcp.resource("system://info")
+def get_system_info() -> str:
     """
-    Retrieves mock weather data for a specific city.
+    Returns static system information as a resource.
     """
-    return {
-        "city": city,
-        "temperature": 22,
-        "unit": "celsius",
-        "condition": "sunny",
-        "note": "This is dummy data from my-mcp-server"
-    }
+    return "System: MCP Data Processor\nStatus: Operational\nVersion: 1.0.0"
 
-
-# --- RESOURCES ---
-
-@mcp.resource("config://app-settings")
-def get_app_settings() -> str:
-    return "LOG_LEVEL=INFO\nMAX_THREADS=4\nDATABASE_URL=sqlite:///data.db"
-
-
-@mcp.resource("data://history")
-def get_processing_history() -> str:
-    return "2023-10-27: Processed 'hello world'\n2023-10-27: Processed 'mcp example'"
-
-
-# --- SERVER RUNNER ---
+@mcp.prompt()
+def summarize_report(report_content: str) -> str:
+    """
+    A prompt template to help the LLM summarize a data report.
+    """
+    return f"Please provide a concise summary of the following data report:\n\n{report_content}"
 
 if __name__ == "__main__":
-    mcp.run(transport="http")
+    # Run the server using the built-in CLI
+    # Example usage: 
+    # 1. Install dependencies: pip install -r requirements.txt
+    # 2. Run the server: python server.py
+    mcp.run()
