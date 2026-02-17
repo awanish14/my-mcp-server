@@ -26,8 +26,6 @@ def summarize_report(report_content: str) -> str:
     return f"Please provide a concise summary of the following data report:\n\n{report_content}"
 
 if __name__ == "__main__":
-    # Run the server using the built-in CLI
-    # Example usage: 
-    # 1. Install dependencies: pip install -r requirements.txt
-    # 2. Run the server: python server.py
-    mcp.run()
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    mcp.run(transport="http", port=port)
