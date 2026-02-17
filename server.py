@@ -26,6 +26,4 @@ def summarize_report(report_content: str) -> str:
     return f"Please provide a concise summary of the following data report:\n\n{report_content}"
 
 if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 8000))
-    mcp.run(transport="http", port=port)
+    mcp.run()
