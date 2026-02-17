@@ -102,7 +102,13 @@ if __name__ == "__main__":
     # uv run server_file.py
     #
     # To use this with a client (like Claude Desktop), point the config to this file.
-    mcp.run()
+  import os
+    port = int(os.environ.get("PORT", 8000))
+    mcp.run(
+        transport="http",
+        host="0.0.0.0",
+        port=port
+    )
 
 """
 INSTRUCTIONS FOR RUNNING:
