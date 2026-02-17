@@ -92,15 +92,6 @@ def analyze_data_prompt(topic: str) -> List[UserMessage]:
 
 
 # --- SERVER RUNNER ---
-
-    # To run this server:
-    # 1. Install dependencies: pip install mcp
-    # 2. Run directly: python server_file.py
-    # 
-    # Alternatively, using 'uv' for a managed experience:
-    # uv run server_file.py
-    #
-    # To use this with a client (like Claude Desktop), point the config to this file.
 if __name__ == "__main__":
     import os
 
@@ -111,30 +102,3 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=port
     )
-
-
-"""
-INSTRUCTIONS FOR RUNNING:
-
-1. Requirements:
-   - Python 3.10 or higher
-   - 'mcp' library installed (pip install mcp)
-
-2. Local Development:
-   $ python my_mcp_server.py
-
-3. Integration with Claude Desktop:
-   Add this to your claude_desktop_config.json:
-   {
-     "mcpServers": {
-       "my-mcp-server": {
-         "command": "python",
-         "args": ["/absolute/path/to/this/file.py"]
-       }
-     }
-   }
-
-4. Using uv (Recommended):
-   $ uv run my_mcp_server.py
-"""
-
